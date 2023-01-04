@@ -16,19 +16,19 @@ import social_links from "./links-data";
 import "../../App.css";
 
 const Links = () => {
-  console.log(social_links.socials.map((links) => links.name));
-  const myLinks = social_links.socials.map((links) => {
+  const myLinks = social_links.socials.map((links, index) => {
+    console.log(index)
     return (
-      <ListGroupItem className="" href={links.link} tag="a">
+      <ListGroupItem className="" key={index} href={links.link} tag="a">
         <Row className="stackable">
-          <Col className="col-3">
-            <h5>{links.name}</h5>
+          <Col className="col-4">
+            <b><p>{links.name}</p></b>
           </Col>
-          <Col className="col-7">
+          <Col className="col-6">
             <p>{links.description}</p>
           </Col>
           <Col className="col-2">
-            <img alt="" src={links.icon} style={{ width: "30px" }}></img>
+            <img alt="" src={links.icon} style={{ width: "25px" }}></img>
           </Col>
         </Row>
       </ListGroupItem>
@@ -42,7 +42,7 @@ const Links = () => {
         style={{
           textAlign: "center",
           marginBottom: "2rem",
-          width: "max-content",
+          width: "fit-content",
         }}
         className="sm"
       >
@@ -53,10 +53,7 @@ const Links = () => {
         <div>
           <h4>Vernon's Links</h4>
         </div>
-        {/* </CardBody>
-        </Card> */}
-
-        <ListGroup id="links" >{myLinks}</ListGroup>
+        <ListGroup id="links">{myLinks}</ListGroup>
       </Container>
     </Container>
   );

@@ -19,14 +19,8 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const json = localStorage.getItem("site-dark-mode");
-    const currentMode = JSON.parse(json);
-    if (currentMode) {
-      setDarkMode(true);
-    } else {
-      setDarkMode(false);
-    }
-  }, []);
+		localStorage.setItem('site-dark-mode', JSON.stringify(darkMode));
+	}, [darkMode]);
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark");
@@ -38,6 +32,19 @@ function App() {
       links.classList.remove("dark");
     }
   }, [darkMode]);
+  useEffect(() => {
+    const json = localStorage.getItem("site-dark-mode");
+    const currentMode = JSON.parse(json);
+    console.log(json);
+    if (currentMode) {
+      setDarkMode(!darkMode);
+    } else {
+      setDarkMode(darkMode);
+    }
+  }, []);
+
+
+
   console.log(document);
   return (
     <div className="App">
@@ -51,13 +58,12 @@ function App() {
               className="sun"
             />
           ) : (
-              <Moon
-                onClick={() => setDarkMode(true)}
-                style={{ cursor: "pointer", color: "black" }}
-                label="T"
-              />
+            <Moon
+              onClick={() => setDarkMode(true)}
+              style={{ cursor: "pointer", color: "black" }}
+              label="T"
+            />
           )}{" "}
-        
         </Col>
       </Row>
       <Row style={{ marginTop: "1rem", textAlign: "center" }}>

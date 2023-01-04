@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/vernon-portfolio/static/css/main.f4bc730f.css",
+    "main.js": "/vernon-portfolio/static/js/main.18d6ee84.js",
+    "index.html": "/vernon-portfolio/index.html",
+    "main.f4bc730f.css.map": "/vernon-portfolio/static/css/main.f4bc730f.css.map",
+    "main.18d6ee84.js.map": "/vernon-portfolio/static/js/main.18d6ee84.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f4bc730f.css",
+    "static/js/main.18d6ee84.js"
+  ]
+}

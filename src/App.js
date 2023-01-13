@@ -2,25 +2,21 @@ import Links from "./components/links/links-display";
 import "./App.css";
 import { Moon, Sun } from "react-feather";
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Button,
-  Row,
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Container,
-  CardImg,
-} from "reactstrap";
+import { Row, Col } from "reactstrap";
+import { SessionService } from "./services/session.service";
 function App() {
+  const session = SessionService.session;
+
+  const sm = SessionService.create();
+  let localDataSubscription = session;
+  let initialSub = session;
+
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-		localStorage.setItem('site-dark-mode', JSON.stringify(darkMode));
-	}, [darkMode]);
+    initialSub.store("site-dark-mode", darkMode)
+    // localStorage.setItem("site-dark-mode", JSON.stringify(darkMode));
+  }, [darkMode]);
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark");
@@ -42,8 +38,6 @@ function App() {
       setDarkMode(darkMode);
     }
   }, []);
-
-
 
   console.log(document);
   return (

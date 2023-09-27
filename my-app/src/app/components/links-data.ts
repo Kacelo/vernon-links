@@ -8,7 +8,7 @@ export const socials = [
   {
     name: "twitter",
     link: "https://twitter.com/KaceloVernon",
-    icon: "https://cdn-icons-png.flaticon.com/512/25/25347.png",
+    icon: "https://img.icons8.com/?size=256&id=phOKFKYpe00C&format=png",
     description: "@KaceloVernon",
   },
   {
@@ -42,3 +42,7 @@ export const socials = [
     description: "My Portfolio Website",
   },
 ];
+export const userDetails = {
+  name: "Vernon",
+  profilePicture: "https://pbs.twimg.com/profile_images/1297566220745678848/tMal4cip_400x400.jpg",
+}

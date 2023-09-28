@@ -1,17 +1,19 @@
 import {
   Box,
+  Button,
   Container,
   Heading,
   IconButton,
   Image,
+  Link,
   List,
   SimpleGrid,
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
-import Link from "next/link";
-import { BookingModal } from "./shareModal";
+import React, { useEffect, useState } from "react";
+import { LinkSharingModal } from "./shareModal";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 type LinkType = {
   name: string;
@@ -29,8 +31,18 @@ interface LinksInterface {
 }
 
 const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpenModal(!openModal);
+  };
+
+  useEffect(() => {
+    setIsOpen(openModal);
+  }, [openModal]);
   return (
-    <Box
+    <Container
       className="stackable"
       style={styles.links}
       rounded={"full"}
@@ -39,26 +51,51 @@ const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
     >
       <Stack
         direction={"row"}
-        style={{ width: "100%", height: "%100", margin: "1em 0" }}
+        style={{ width: "100%", height: "%100", margin: "1em 0", cursor:"pointer" }}
       >
-        <Box marginLeft="10px" margin="auto 10px" columnGap={5}>
-          <Link href={link as string}>
-            <Image alt="" src={icon} style={{ width: "30px" }} />
-          </Link>
+        <Box
+          style={{ textAlign: "center", margin: "auto 10px" }}
+          as={"a"}
+          href={link}
+        >
+          <Image alt="" src={icon} style={{ width: "30px" }} />
         </Box>
 
-        {/* Wrap the icon and description in a div with display: flex */}
-
-        <Box style={{ textAlign: "center", margin: "auto auto" }}>
-          <Link href={link as string} style={{ textAlign: "center" }}>
-            <Text>{description}</Text>
-          </Link>
+        <Box
+          style={{ textAlign: "center", margin: "auto auto" }}
+          as={"a"}
+          href={link}
+        >
+          <Button variant={"link"} colorScheme={"black.100"} size={"sm"}>
+            {description}
+          </Button>
         </Box>
         <Box margin={"auto 0"} marginRight={"15px"}>
-          <BookingModal />
+          <Button
+            style={{
+              borderRadius: "4rem",
+              width: "30px",
+              height: "30px",
+              backgroundColor: "transparent",
+              borderStyle: "none",
+              cursor: "pointer",
+            }}
+            _hover={{
+              bg: "grey.200",
+            }}
+            onClick={handleClick}
+          >
+            <Box
+              style={{ margin: "2px 0 0 0", backgroundColor: "transparent" }}
+            >
+              {" "}
+              <BiDotsHorizontalRounded />
+            </Box>
+          </Button>
+          <LinkSharingModal link={link} openModal={isOpen} on />
         </Box>
       </Stack>
-    </Box>
+    </Container>
   );
 };
 // BiDotsHorizontalRounded
@@ -72,7 +109,7 @@ const LinksComponent = ({ links, user }: LinksInterface) => {
         margin: "auto",
         maxWidth: "500px",
         marginTop: "10em",
-        textAlign: "center"
+        textAlign: "center",
       }}
     >
       <Image

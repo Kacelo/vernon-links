@@ -1,63 +1,96 @@
+import { useState } from "react";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 import {
+  Button,
+  Container,
+  List,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
-  Button,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
-  Flex,
-  Heading,
-  Text,
-  Image,
-  ButtonGroup,
 } from "@chakra-ui/react";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { useDisclosure } from "@chakra-ui/react";
+import React from "react";
 
-export function BookingModal() {
+interface LinkSharingModalProps {
+  link?: string;
+  openModal: boolean;
+  onCloseModal: () => void; // Function to close the modal
+}
+
+export function LinkSharingModal({
+  link,
+  openModal,
+  onCloseModal, // Receive the onCloseModal function as a prop
+}: LinkSharingModalProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // Use openModal prop to control the modal's visibility
+  React.useEffect(() => {
+    if (openModal) {
+      onOpen();
+    } else {
+      onClose();
+    }
+  }, [openModal, onOpen, onClose]);
+  // Share function for each social media platform
+  const shareOnFacebook = () => {
+    // Implement Facebook sharing logic here
+    console.log("Sharing on Facebook:", link);
+  };
+
+  const shareOnTwitter = () => {
+    // Implement Twitter sharing logic here
+    console.log("Sharing on Twitter:", link);
+  };
+
+  const shareOnLinkedIn = () => {
+    // Implement LinkedIn sharing logic here
+    console.log("Sharing on LinkedIn:", link);
+  };
   return (
-    <>
-      {/* <Button >Open Modal</Button> */}
-      <Button
-        style={{
-          borderRadius: "4rem",
-          width: "30px",
-          height: "30px",
-          backgroundColor: "transparent",
-          borderStyle: "none",
-          cursor: "pointer",
-        }}
-        _hover={{
-          bg: "grey.200",
-        }}
-        onClick={onOpen}
-      >
-        <div style={{ margin: "2px 0 0 0", backgroundColor: "transparent" }}>
-          {" "}
-          <BiDotsHorizontalRounded />
-        </div>
-      </Button>
+    <Container>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader>Share this link</ModalHeader>
+          <ModalCloseButton onClick={onCloseModal} />{" "}
+          {/* Call the onCloseModal function */}
           <ModalBody>
-            {/* <Lorem count={2} /> */}
+            {/* {link} */}
+            <Stack
+              direction={"column"}
+              spacing={3}
+              align={"center"}
+              alignSelf={"center"}
+              position={"relative"}
+            >
+              <Button colorScheme="facebook" onClick={shareOnFacebook} width={200}>
+                Share on Facebook
+              </Button>
+              <Button colorScheme="blackAlpha" onClick={shareOnTwitter} width={200}>
+                Share on X
+              </Button>
+              <Button colorScheme="linkedin" onClick={shareOnLinkedIn} width={200}>
+                Share on LinkedIn
+              </Button>
+              <Button colorScheme="whatsapp" onClick={shareOnLinkedIn} width={200}>
+                Share on Whatsapp
+              </Button>
+            </Stack>
           </ModalBody>
-
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
+            <Button colorScheme="blue" mr={3} onClick={onCloseModal}>
+              Sign Up free
             </Button>
-            <Button variant='ghost'>Secondary Action</Button>
+            <Button variant="ghost">Find Out More</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </Container>
   );
 }

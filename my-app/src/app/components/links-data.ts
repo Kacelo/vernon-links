@@ -43,6 +43,6 @@ export const socials = [
   },
 ];
 export const userDetails = {
-  name: "Vernon",
+  name: "@vernon_kacelo",
   profilePicture: "https://pbs.twimg.com/profile_images/1297566220745678848/tMal4cip_400x400.jpg",
 }

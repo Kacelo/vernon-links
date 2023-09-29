@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import {
+  Box,
   Button,
   Container,
   List,
@@ -57,8 +58,11 @@ export function LinkSharingModal({
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Share this link</ModalHeader>
+          <Box textAlign={"center"}>
+          {link==="localhost"? <ModalHeader>Share this link page</ModalHeader>  : <ModalHeader>Share this link</ModalHeader>}
           <ModalCloseButton onClick={onCloseModal} />{" "}
+          </Box>
+          
           {/* Call the onCloseModal function */}
           <ModalBody>
             {/* {link} */}

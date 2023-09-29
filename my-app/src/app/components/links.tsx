@@ -30,7 +30,7 @@ interface LinksInterface {
   user: UserType;
 }
 
-const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
+const ModalButton = (link: string) =>{
   const [openModal, setOpenModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,6 +41,42 @@ const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
   useEffect(() => {
     setIsOpen(openModal);
   }, [openModal]);
+
+  return(
+    <Box margin={"auto 0"} marginRight={"15px"}>
+          <Button
+            style={{
+              borderRadius: "4rem",
+              width: "40px",
+              height: "40px",
+              backgroundColor: "white",
+              borderStyle: "none",
+              cursor: "pointer",
+            }}
+            _hover={{
+              bg: "gray.200",
+            }}
+            onClick={handleClick}
+          >
+            <Box
+              style={{ margin: "2px 0 0 0", backgroundColor: "transparent" }}
+            >
+              {" "}
+              <BiDotsHorizontalRounded />
+            </Box>
+          </Button>
+          <LinkSharingModal
+            link={link}
+            openModal={isOpen}
+            onCloseModal={handleClick}
+          />
+        
+        </Box>
+  )
+}
+
+const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
+
   return (
     <Container
       className="stackable"
@@ -51,7 +87,12 @@ const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
     >
       <Stack
         direction={"row"}
-        style={{ width: "100%", height: "%100", margin: "1em 0", cursor:"pointer" }}
+        style={{
+          width: "100%",
+          height: "%100",
+          margin: "1em 0",
+          cursor: "pointer",
+        }}
       >
         <Box
           style={{ textAlign: "center", margin: "auto 10px" }}
@@ -70,30 +111,7 @@ const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
             {description}
           </Button>
         </Box>
-        <Box margin={"auto 0"} marginRight={"15px"}>
-          <Button
-            style={{
-              borderRadius: "4rem",
-              width: "30px",
-              height: "30px",
-              backgroundColor: "transparent",
-              borderStyle: "none",
-              cursor: "pointer",
-            }}
-            _hover={{
-              bg: "grey.200",
-            }}
-            onClick={handleClick}
-          >
-            <Box
-              style={{ margin: "2px 0 0 0", backgroundColor: "transparent" }}
-            >
-              {" "}
-              <BiDotsHorizontalRounded />
-            </Box>
-          </Button>
-          <LinkSharingModal link={link} openModal={isOpen} on />
-        </Box>
+        {ModalButton(link as string)}
       </Stack>
     </Container>
   );
@@ -108,20 +126,25 @@ const LinksComponent = ({ links, user }: LinksInterface) => {
       style={{
         margin: "auto",
         maxWidth: "500px",
-        marginTop: "10em",
+        marginTop: "5em",
         textAlign: "center",
       }}
     >
+      <Box textAlign={"end"}>
+      {ModalButton("localhost" as string)}
+
+      </Box>
       <Image
         src={profilePicture}
         rounded={"full"}
-        width={200}
+        width={150}
         display={"inline-block"}
+        alt="Profile Picture"
         // style={{ width: "10rem", borderRadius: "50%" }}
       />
 
       <Box>
-        <Heading>{name}'s Links</Heading>
+        <Heading>{name}</Heading>
       </Box>
       <List id="links" style={{ padding: 0 }}>
         {links.map((linkItem, index) => (

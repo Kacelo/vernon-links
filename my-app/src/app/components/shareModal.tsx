@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import {
+  Box,
   Button,
   Container,
   List,
@@ -15,6 +16,10 @@ import {
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import React from "react";
+import { SiLinkedin, SiMessenger } from 'react-icons/si'
+import { FaFacebook, FaWhatsapp } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
+
 
 interface LinkSharingModalProps {
   link?: string;
@@ -39,26 +44,49 @@ export function LinkSharingModal({
   }, [openModal, onOpen, onClose]);
   // Share function for each social media platform
   const shareOnFacebook = () => {
-    // Implement Facebook sharing logic here
+
+    const message = `${link}`;
+    const url = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
+      message
+    )}`;
+    window.open(url, "_blank");
     console.log("Sharing on Facebook:", link);
   };
 
   const shareOnTwitter = () => {
-    // Implement Twitter sharing logic here
-    console.log("Sharing on Twitter:", link);
+
+    const message = `Hello, check this link out: - ${link}`;
+    const url = `https:///x.com/intent/tweet?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(url, "_blank");
   };
 
   const shareOnLinkedIn = () => {
-    // Implement LinkedIn sharing logic here
-    console.log("Sharing on LinkedIn:", link);
+
+    const message = `${link}`;
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      message
+    )}`;
+    window.open(url, "_blank");
+  };
+  const shareOnWhatsapp = () => {
+    const message = `Hello, check this link out: - ${link}`;
+    const url = `https://wa.me/?text${encodeURIComponent(
+      message
+    )}`;
+    window.open(url, "_blank");
   };
   return (
     <Container>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Share this link</ModalHeader>
+          <Box textAlign={"center"}>
+          {link==="localhost"? <ModalHeader>Share this link page</ModalHeader>  : <ModalHeader>Share this link</ModalHeader>}
           <ModalCloseButton onClick={onCloseModal} />{" "}
+          </Box>
+          
           {/* Call the onCloseModal function */}
           <ModalBody>
             {/* {link} */}
@@ -69,16 +97,16 @@ export function LinkSharingModal({
               alignSelf={"center"}
               position={"relative"}
             >
-              <Button colorScheme="facebook" onClick={shareOnFacebook} width={200}>
+              <Button colorScheme="facebook" onClick={shareOnFacebook} width={200} leftIcon={<FaFacebook />}>
                 Share on Facebook
               </Button>
-              <Button colorScheme="blackAlpha" onClick={shareOnTwitter} width={200}>
+              <Button colorScheme="blackAlpha" onClick={shareOnTwitter} width={200} leftIcon={<FaXTwitter />}>
                 Share on X
               </Button>
-              <Button colorScheme="linkedin" onClick={shareOnLinkedIn} width={200}>
+              <Button colorScheme="linkedin" onClick={shareOnLinkedIn} width={200} leftIcon={<SiLinkedin />}>
                 Share on LinkedIn
               </Button>
-              <Button colorScheme="whatsapp" onClick={shareOnLinkedIn} width={200}>
+              <Button colorScheme="whatsapp" onClick={shareOnWhatsapp} width={200} leftIcon={<FaWhatsapp />}>
                 Share on Whatsapp
               </Button>
             </Stack>

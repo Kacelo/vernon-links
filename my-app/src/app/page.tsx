@@ -1,21 +1,17 @@
 "use client";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import LinksComponent from "./components/links";
 import { socials, userDetails } from "./components/links-data";
-import { Col, Row } from "reactstrap";
-import {
-  Box,
-  chakra,
-  Container,
-  Stack,
-  Text,
-  useColorModeValue,
-  VisuallyHidden,
-} from "@chakra-ui/react";
+
 export default function Home() {
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
   return (
     <>
-      <LinksComponent links={socials} user={userDetails} />;
+      {isClient ? <LinksComponent links={socials} user={userDetails} /> : ""};
     </>
   );
 }

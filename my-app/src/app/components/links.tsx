@@ -30,7 +30,7 @@ interface LinksInterface {
   user: UserType;
 }
 
-const ModalButton = (link: string) =>{
+const ModalButton = (link: string) => {
   const [openModal, setOpenModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,41 +42,36 @@ const ModalButton = (link: string) =>{
     setIsOpen(openModal);
   }, [openModal]);
 
-  return(
+  return (
     <Box margin={"auto 0"} marginRight={"15px"}>
-          <Button
-            style={{
-              borderRadius: "4rem",
-              width: "40px",
-              height: "40px",
-              backgroundColor: "white",
-              borderStyle: "none",
-              cursor: "pointer",
-            }}
-            _hover={{
-              bg: "gray.200",
-            }}
-            onClick={handleClick}
-          >
-            <Box
-              style={{ margin: "2px 0 0 0", backgroundColor: "transparent" }}
-            >
-              {" "}
-              <BiDotsHorizontalRounded />
-            </Box>
-          </Button>
-          <LinkSharingModal
-            link={link}
-            openModal={isOpen}
-            onCloseModal={handleClick}
-          />
-        
+      <Button
+        style={{
+          borderRadius: "4rem",
+          width: "40px",
+          height: "40px",
+          backgroundColor: "white",
+          borderStyle: "none",
+          cursor: "pointer",
+        }}
+        _hover={{
+          bg: "gray.200",
+        }}
+        onClick={handleClick}
+      >
+        <Box style={{ margin: "2px 0 0 0", backgroundColor: "transparent" }}>
+          <BiDotsHorizontalRounded />
         </Box>
-  )
-}
+      </Button>
+      <LinkSharingModal
+        link={link}
+        openModal={isOpen}
+        onCloseModal={handleClick}
+      />
+    </Box>
+  );
+};
 
 const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
-
   return (
     <Container
       className="stackable"
@@ -130,10 +125,7 @@ const LinksComponent = ({ links, user }: LinksInterface) => {
         textAlign: "center",
       }}
     >
-      <Box textAlign={"end"}>
-      {ModalButton("localhost" as string)}
-
-      </Box>
+      <Box textAlign={"end"}>{ModalButton("localhost" as string)}</Box>
       <Image
         src={profilePicture}
         rounded={"full"}

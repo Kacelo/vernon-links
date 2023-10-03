@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import {
@@ -16,10 +17,9 @@ import {
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import React from "react";
-import { SiLinkedin, SiMessenger } from 'react-icons/si'
-import { FaFacebook, FaWhatsapp } from 'react-icons/fa'
-import { FaXTwitter } from 'react-icons/fa6'
-
+import { SiLinkedin, SiMessenger } from "react-icons/si";
+import { FaFacebook, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 interface LinkSharingModalProps {
   link?: string;
@@ -44,7 +44,6 @@ export function LinkSharingModal({
   }, [openModal, onOpen, onClose]);
   // Share function for each social media platform
   const shareOnFacebook = () => {
-
     const message = `${link}`;
     const url = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
       message
@@ -54,7 +53,6 @@ export function LinkSharingModal({
   };
 
   const shareOnTwitter = () => {
-
     const message = `Hello, check this link out: - ${link}`;
     const url = `https:///x.com/intent/tweet?text=${encodeURIComponent(
       message
@@ -63,7 +61,6 @@ export function LinkSharingModal({
   };
 
   const shareOnLinkedIn = () => {
-
     const message = `${link}`;
     const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
       message
@@ -72,9 +69,7 @@ export function LinkSharingModal({
   };
   const shareOnWhatsapp = () => {
     const message = `Hello, check this link out: - ${link}`;
-    const url = `https://wa.me/?text${encodeURIComponent(
-      message
-    )}`;
+    const url = `https://wa.me/?text${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
   return (
@@ -83,10 +78,14 @@ export function LinkSharingModal({
         <ModalOverlay />
         <ModalContent>
           <Box textAlign={"center"}>
-          {link==="localhost"? <ModalHeader>Share this link page</ModalHeader>  : <ModalHeader>Share this link</ModalHeader>}
-          <ModalCloseButton onClick={onCloseModal} />{" "}
+            {link === "localhost" ? (
+              <ModalHeader>Share this link page</ModalHeader>
+            ) : (
+              <ModalHeader>Share this link</ModalHeader>
+            )}
+            <ModalCloseButton onClick={onCloseModal} />
           </Box>
-          
+
           {/* Call the onCloseModal function */}
           <ModalBody>
             {/* {link} */}
@@ -97,16 +96,36 @@ export function LinkSharingModal({
               alignSelf={"center"}
               position={"relative"}
             >
-              <Button colorScheme="facebook" onClick={shareOnFacebook} width={200} leftIcon={<FaFacebook />}>
+              <Button
+                colorScheme="facebook"
+                onClick={shareOnFacebook}
+                width={200}
+                leftIcon={<FaFacebook />}
+              >
                 Share on Facebook
               </Button>
-              <Button colorScheme="blackAlpha" onClick={shareOnTwitter} width={200} leftIcon={<FaXTwitter />}>
+              <Button
+                colorScheme="blackAlpha"
+                onClick={shareOnTwitter}
+                width={200}
+                leftIcon={<FaXTwitter />}
+              >
                 Share on X
               </Button>
-              <Button colorScheme="linkedin" onClick={shareOnLinkedIn} width={200} leftIcon={<SiLinkedin />}>
+              <Button
+                colorScheme="linkedin"
+                onClick={shareOnLinkedIn}
+                width={200}
+                leftIcon={<SiLinkedin />}
+              >
                 Share on LinkedIn
               </Button>
-              <Button colorScheme="whatsapp" onClick={shareOnWhatsapp} width={200} leftIcon={<FaWhatsapp />}>
+              <Button
+                colorScheme="whatsapp"
+                onClick={shareOnWhatsapp}
+                width={200}
+                leftIcon={<FaWhatsapp />}
+              >
                 Share on Whatsapp
               </Button>
             </Stack>

@@ -2,10 +2,11 @@
 "use client";
 
 import { ChakraProvider, theme } from "@chakra-ui/react";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import { CacheProvider } from "@chakra-ui/next-js";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+const title = "Vernon's Linked List";
 
 export default function RootLayout({
   children,
@@ -13,22 +14,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" style={{ scrollBehavior: "smooth" }}>
-      <head>
-        <title>Vernon's Linked List</title>
+    <html lang="en" suppressHydrationWarning={true}>
+      {/* <head>
+        <title>{title}</title>
         <meta title="description" content="Beauty is our duty" />
-        <link
-          rel="icon"
-          type="image/jpeg"
-          sizes="32x32"
-          href="shena-logo.jpeg"
-        />
-      </head>
+      </head> */}
       <body>
-        <CacheProvider>
+        {/* <CacheProvider> */}
           <ChakraProvider>{children}</ChakraProvider>
-        </CacheProvider>{" "}
-      </body>{" "}
+        {/* </CacheProvider> */}
+      </body>
     </html>
   );
 }

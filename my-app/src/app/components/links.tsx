@@ -3,13 +3,9 @@ import {
   Button,
   Container,
   Heading,
-  IconButton,
   Image,
-  Link,
   List,
-  SimpleGrid,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { LinkSharingModal } from "./shareModal";

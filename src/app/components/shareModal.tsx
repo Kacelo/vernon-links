@@ -56,7 +56,7 @@ export const LinkSharingModal2 = ({
   };
   const shareOnWhatsapp = () => {
     const message = `Hello, check this link out: - ${link}`;
-    const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
   return (

@@ -1,14 +1,14 @@
 import {
-  Box,
-  Button,
   Container,
-  Heading,
+  Button,
+  Grid,
+  Segment,
   Image,
-  List,
-  Stack,
-} from "@chakra-ui/react";
+  Header,
+} from "semantic-ui-react";
+
 import React, { useEffect, useState } from "react";
-import { LinkSharingModal } from "./shareModal";
+import { LinkSharingModal2 } from "./shareModal";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 type LinkType = {
@@ -26,20 +26,22 @@ interface LinksInterface {
   user: UserType;
 }
 
-const ModalButton = (link: string) => {
+const ModalButton = (linkDetails: LinkType) => {
+  const {link, icon} =linkDetails 
   const [openModal, setOpenModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = () => {
+  const handleOpen = () =>{
     setOpenModal(!openModal);
-  };
+
+  }
 
   useEffect(() => {
     setIsOpen(openModal);
   }, [openModal]);
 
   return (
-    <Box margin={"auto 0"} marginRight={"15px"}>
+    <div style={{ margin: "auto 0", marginRight: "15px" }}>
       <Button
         style={{
           borderRadius: "4rem",
@@ -52,31 +54,62 @@ const ModalButton = (link: string) => {
         _hover={{
           bg: "gray.200",
         }}
-        onClick={handleClick}
+        onClick={handleOpen}
       >
-        <Box style={{ margin: "2px 0 0 0", backgroundColor: "transparent" }}>
+        <div style={{ margin: "2px 0 0 0", backgroundColor: "transparent" }}>
           <BiDotsHorizontalRounded />
-        </Box>
+        </div>
       </Button>
-      <LinkSharingModal
+      <LinkSharingModal2
         link={link}
         openModal={isOpen}
-        onCloseModal={handleClick}
+        linkIcon={icon}
       />
-    </Box>
+    </div>
   );
 };
 
-const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
+const RoundedDiv = (linkData: LinkType) => {
+  const { name, description, icon, link } = linkData;
   return (
-    <Container
-      className="stackable"
-      style={styles.links}
-      rounded={"full"}
-      border={1}
-      height={""}
-    >
-      <Stack
+    // <div className="" style={{ borderRadius: "60px", borderStyle: "solid" }}>
+    <Segment style={{ borderRadius: "40px" }}>
+      <Grid columns={"equal"} padded={"vertically"}>
+        <Grid.Row
+          style={{
+            boxShadow: " rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
+            padding: 0,
+          }}
+        >
+          <Grid.Column
+            style={{ textAlign: "center", margin: "auto 0" }}
+            as={"a"}
+            href={link}
+            // width={1}
+          >
+            <Image alt="" src={icon} style={{ width: "30px" }} />
+          </Grid.Column>
+          <Grid.Column
+            style={{ textAlign: "center", margin: "auto 0" }}
+            as={"a"}
+            href={link}
+            width={8}
+            animated
+          >
+            {/* <Button variant={"link"} colorScheme={"black.100"} size={"small"}> */}
+            {description}
+            {/* </Button>{" "} */}
+          </Grid.Column>
+          <Grid.Column style={{ textAlign: "end" }}>
+            {ModalButton(linkData)}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Segment>
+  );
+
+  {
+    /* <Stack
         direction={"row"}
         style={{
           width: "100%",
@@ -98,14 +131,14 @@ const RoundedDiv = ({ name, description, icon, link }: LinkType) => {
           as={"a"}
           href={link}
         >
-          <Button variant={"link"} colorScheme={"black.100"} size={"sm"}>
+          <Button variant={"link"} colorScheme={"black.100"} size={"small"}>
             {description}
           </Button>
         </Box>
         {ModalButton(link as string)}
-      </Stack>
-    </Container>
-  );
+      </Stack> */
+  }
+  // </div>
 };
 // BiDotsHorizontalRounded
 
@@ -116,25 +149,26 @@ const LinksComponent = ({ links, user }: LinksInterface) => {
     <Container
       style={{
         margin: "auto",
-        maxWidth: "500px",
+        maxWidth: "500px!important",
         marginTop: "5em",
         textAlign: "center",
       }}
     >
-      <Box textAlign={"end"}>{ModalButton("localhost" as string)}</Box>
-      <Image
-        src={profilePicture}
-        rounded={"full"}
-        width={150}
-        display={"inline-block"}
-        alt="Profile Picture"
-        // style={{ width: "10rem", borderRadius: "50%" }}
-      />
+      <div style={{ maxWidth: "500px", margin: "auto" }}>
+        {/* <div style={{ textAlign: "end" }}>
+          {ModalButton("localhost" as string)}
+        </div> */}
+        <Image
+          src={profilePicture}
+          width={150}
+          display={"inline-block"}
+          alt="Profile Picture"
+          circular
+          centered
+        />
 
-      <Box>
-        <Heading>{name}</Heading>
-      </Box>
-      <List id="links" style={{ padding: 0 }}>
+        <Header as="h1">{name}</Header>
+
         {links.map((linkItem, index) => (
           <RoundedDiv
             key={index}
@@ -144,7 +178,7 @@ const LinksComponent = ({ links, user }: LinksInterface) => {
             link={linkItem.link}
           />
         ))}
-      </List>
+      </div>
     </Container>
   );
 };

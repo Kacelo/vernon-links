@@ -1,9 +1,7 @@
 // import './globals.css'
 "use client";
-
-import { ChakraProvider, theme } from "@chakra-ui/react";
 // import { Inter } from "next/font/google";
-import { CacheProvider } from "@chakra-ui/next-js";
+import 'semantic-ui-css/semantic.min.css'
 
 // const inter = Inter({ subsets: ["latin"] });
 const title = "Vernon's Linked List";
@@ -20,9 +18,7 @@ export default function RootLayout({
         <meta title="description" content="Beauty is our duty" />
       </head> */}
       <body>
-        {/* <CacheProvider> */}
-          <ChakraProvider>{children}</ChakraProvider>
-        {/* </CacheProvider> */}
+         {children}
       </body>
     </html>
   );

@@ -1,5 +1,0 @@
-
-
-const handleLinkSharing =(link:string)=>{
-    
-}

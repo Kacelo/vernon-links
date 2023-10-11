@@ -1,8 +1,13 @@
 // import './globals.css'
 "use client";
 // import { Inter } from "next/font/google";
-import 'semantic-ui-css/semantic.min.css'
+import "semantic-ui-css/semantic.min.css";
+import { Inter } from "@next/font/google";
 
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '800', '700'],
+})
 // const inter = Inter({ subsets: ["latin"] });
 const title = "Vernon's Linked List";
 
@@ -13,13 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      {/* <head>
+      <head>
         <title>{title}</title>
         <meta title="description" content="Beauty is our duty" />
-      </head> */}
-      <body>
-         {children}
-      </body>
+        
+      </head>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

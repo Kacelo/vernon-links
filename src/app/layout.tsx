@@ -1,6 +1,4 @@
-// import './globals.css'
 "use client";
-// import { Inter } from "next/font/google";
 import "semantic-ui-css/semantic.min.css";
 import { Inter } from "@next/font/google";
 
@@ -8,7 +6,6 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '800', '700'],
 })
-// const inter = Inter({ subsets: ["latin"] });
 const title = "Vernon's Linked List";
 
 export default function RootLayout({
@@ -17,13 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en" >
       <head>
         <title>{title}</title>
-        <meta title="description" content="Beauty is our duty" />
-        
+        {/* <meta name="description" content="Beauty is our duty" /> */}
       </head>
-      <body className={inter.className}>{children}</body>
+      <body suppressHydrationWarning={true} className={inter.className}>{children}</body>
     </html>
   );
 }

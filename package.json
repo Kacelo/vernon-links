@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.1.5",
+    "@next/font": "^13.5.4",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

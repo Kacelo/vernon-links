@@ -64,7 +64,11 @@ const SignUpForm = () => {
                   <Form onSubmit={handleSubmit}>
                     <Form.Field>
                       {errors.email && touched.email ? (
-                        <div>{errors.email}</div>
+                        <div>
+                          <p style={{ color: "#CA0C00", fontSize: "11px" }}>
+                            {errors.email}
+                          </p>
+                        </div>
                       ) : null}
                       <Input
                         placeholder="Email"
@@ -77,7 +81,11 @@ const SignUpForm = () => {
                     </Form.Field>
                     <Form.Field>
                       {errors.username && touched.username ? (
-                        <div>{errors.username}</div>
+                        <div>
+                          <p style={{ color: "#CA0C00", fontSize: "11px" }}>
+                            {errors.username}
+                          </p>
+                        </div>
                       ) : null}
                       <Input
                         label="my-linked-tree/"
@@ -90,7 +98,11 @@ const SignUpForm = () => {
                     </Form.Field>
                     <Form.Field>
                       {errors.password && touched.password ? (
-                        <div>{errors.password}</div>
+                        <div>
+                           <p style={{ color: "#CA0C00", fontSize: "11px" }}>
+                            {errors.password}
+                          </p>
+                        </div>
                       ) : null}
                       <Input
                         placeholder="Password"
@@ -103,7 +115,9 @@ const SignUpForm = () => {
                     </Form.Field>
                     <Form.Field style={{ display: "inline-flex" }}>
                       <input type="checkbox" onClick={handleButtonClick} />
-                      <p>I agree to the <a>terms and conditions</a></p>
+                      <p>
+                        I agree to the <a>terms and conditions</a>
+                      </p>
                     </Form.Field>
                     <button
                       type="submit"

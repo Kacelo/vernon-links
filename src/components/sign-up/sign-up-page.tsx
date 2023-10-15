@@ -15,23 +15,42 @@ import { Formik } from "formik";
 import { signUpModel } from "./sign-up-model";
 import { signUpValidationSchema } from "./sign-up-validation-schema";
 import Image from "next/image";
-
+// import from ""
 const SignUpForm = () => {
   const [enableButton, setEnableButton] = useState(false);
 
   const handleButtonClick = () => {
     setEnableButton(!enableButton);
   };
+  const getIsMobile = () => window.innerWidth <= 768;
+
+ function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(getIsMobile());
+
+    useEffect(() => {
+        const onResize = () => {
+            setIsMobile(getIsMobile());
+        }
+
+        window.addEventListener("resize", onResize);
+    
+        return () => {
+            window.removeEventListener("resize", onResize);
+        }
+    }, []);
+    return isMobile;
+}
+  const isMobile = useIsMobile();
+  console.log(isMobile);
   return (
     <Grid stackable columns={2} style={{ height: "100%" }}>
       <Grid.Column width={10} style={{ padding: "0em 5em" }}>
-        <Container style={{ textAlign: "start", margin: "0em auto" }}>
-          <Image
+        <Container style={{ textAlign: "start", margin: "1em auto" }}>
+          <img
             src="/images/light.png"
-            width={150}
-            height={150}
+            width={100}
             alt="image with cards"
-          ></Image>
+          ></img>
         </Container>
         <Container style={{ textAlign: "center", width: "640px" }}>
           <Container style={{ textAlign: "center", margin: "2em auto" }}>
@@ -150,7 +169,9 @@ const SignUpForm = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundImage: "url(images/2.png)",
+          display: isMobile? "none": ""
         }}
+        
       ></Grid.Column>
     </Grid>
   );

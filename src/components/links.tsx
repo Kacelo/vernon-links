@@ -77,7 +77,7 @@ const RoundedDiv = (linkData: LinkType) => {
       <Grid columns={"equal"} padded={"vertically"}>
         <Grid.Row
           style={{
-            boxShadow: " rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
+            boxShadow: " rgba(100 100 111 0.2) 0px 7px 29px 0px",
             padding: 0,
           }}
         >
@@ -87,14 +87,14 @@ const RoundedDiv = (linkData: LinkType) => {
             href={link}
             // width={1}
           >
-            <Image alt="" src={icon} style={{ width: "30px" }} />
+            <Image alt="Icon" src={icon} size="small"/>
           </Grid.Column>
           <Grid.Column
             style={{ textAlign: "center", margin: "auto 0" }}
             as={"a"}
             href={link}
             width={8}
-            animated
+            animated="true"
           >
             {/* <Button variant={"link"} colorScheme={"black.100"} size={"small"}> */}
             {description}
@@ -195,5 +195,9 @@ const styles = {
     maxWidth: "500px",
     textAlign: "center",
   },
+  imageStyles: {
+    width:"30px",
+    height:"auto"
+  }
 };
 export default LinksComponent;

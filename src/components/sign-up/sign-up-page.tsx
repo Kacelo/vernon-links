@@ -15,22 +15,24 @@ import { Formik } from "formik";
 import { signUpModel } from "./sign-up-model";
 import { signUpValidationSchema } from "./sign-up-validation-schema";
 import Image from "next/image";
-
+import useDeviceSize from "@/helpers/screen-width-hook";
+// import from ""
 const SignUpForm = () => {
   const [enableButton, setEnableButton] = useState(false);
 
   const handleButtonClick = () => {
     setEnableButton(!enableButton);
   };
+  const [width] = useDeviceSize();
   return (
     <Grid stackable columns={2} style={{ height: "100%" }}>
       <Grid.Column width={10} style={{ padding: "0em 5em" }}>
-        <Container style={{ textAlign: "start", margin: "0em auto" }}>
+        <Container style={{ textAlign: "start", margin: "1em auto" }}>
           <Image
             src="/images/light.png"
-            width={150}
-            height={150}
+            width={100}
             alt="image with cards"
+            height={20}
           ></Image>
         </Container>
         <Container style={{ textAlign: "center", width: "640px" }}>
@@ -88,7 +90,7 @@ const SignUpForm = () => {
                         </div>
                       ) : null}
                       <Input
-                        label="my-linked-tree/"
+                        label="linked-tree/"
                         placeholder="username"
                         name="username"
                         value={values.username}
@@ -99,7 +101,7 @@ const SignUpForm = () => {
                     <Form.Field>
                       {errors.password && touched.password ? (
                         <div>
-                           <p style={{ color: "#CA0C00", fontSize: "11px" }}>
+                          <p style={{ color: "#CA0C00", fontSize: "11px" }}>
                             {errors.password}
                           </p>
                         </div>
@@ -150,6 +152,7 @@ const SignUpForm = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundImage: "url(images/2.png)",
+          display: width < 768 ? "none" : "",
         }}
       ></Grid.Column>
     </Grid>

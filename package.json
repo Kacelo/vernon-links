@@ -11,9 +11,11 @@
   "dependencies": {
     "@chakra-ui/next-js": "^2.1.5",
     "@next/font": "^13.5.4",
+    "bootstrap": "^5.3.2",
     "formik": "^2.4.5",
     "next": "latest",
     "react": "latest",
+    "react-bootstrap": "^2.9.0",
     "react-dom": "latest",
     "react-icons": "^4.11.0",
     "reactstrap": "^9.2.0",

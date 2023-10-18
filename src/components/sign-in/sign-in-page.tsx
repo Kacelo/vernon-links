@@ -15,6 +15,7 @@ import { Formik } from "formik";
 import { signInModel } from "./sign-in-model";
 import { signInValidationSchema } from "./sign-in-validation-schema";
 import Image from "next/image";
+import useDeviceSize from "@/helpers/screen-width-hook";
 
 const SignInForm = () => {
   const [enableButton, setEnableButton] = useState(false);
@@ -22,6 +23,8 @@ const SignInForm = () => {
   const handleButtonClick = () => {
     setEnableButton(!enableButton);
   };
+  const [width] = useDeviceSize();
+
   const accountQuestion = "Don't have an account?";
   return (
     <Grid stackable columns={2} style={{ height: "100%" }}>
@@ -29,8 +32,8 @@ const SignInForm = () => {
         <Container style={{ textAlign: "start", margin: "0em auto" }}>
           <Image
             src="/images/light.png"
-            width={150}
-            height={150}
+            width={100}
+            height={20}
             alt="image with cards"
           ></Image>
         </Container>
@@ -132,6 +135,7 @@ const SignInForm = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundImage: "url(images/signIn2.png)",
+          display: width < 768 ? "none" : "",
         }}
       ></Grid.Column>
     </Grid>

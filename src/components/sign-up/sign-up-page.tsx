@@ -15,6 +15,7 @@ import { Formik } from "formik";
 import { signUpModel } from "./sign-up-model";
 import { signUpValidationSchema } from "./sign-up-validation-schema";
 import Image from "next/image";
+import useDeviceSize from "@/helpers/screen-width-hook";
 // import from ""
 const SignUpForm = () => {
   const [enableButton, setEnableButton] = useState(false);
@@ -22,35 +23,17 @@ const SignUpForm = () => {
   const handleButtonClick = () => {
     setEnableButton(!enableButton);
   };
-  const getIsMobile = () => window.innerWidth <= 768;
-
- function useIsMobile() {
-    const [isMobile, setIsMobile] = useState(getIsMobile());
-
-    useEffect(() => {
-        const onResize = () => {
-            setIsMobile(getIsMobile());
-        }
-
-        window.addEventListener("resize", onResize);
-    
-        return () => {
-            window.removeEventListener("resize", onResize);
-        }
-    }, []);
-    return isMobile;
-}
-  const isMobile = useIsMobile();
-  console.log(isMobile);
+  const [width] = useDeviceSize();
   return (
     <Grid stackable columns={2} style={{ height: "100%" }}>
       <Grid.Column width={10} style={{ padding: "0em 5em" }}>
         <Container style={{ textAlign: "start", margin: "1em auto" }}>
-          <img
+          <Image
             src="/images/light.png"
             width={100}
             alt="image with cards"
-          ></img>
+            height={20}
+          ></Image>
         </Container>
         <Container style={{ textAlign: "center", width: "640px" }}>
           <Container style={{ textAlign: "center", margin: "2em auto" }}>
@@ -107,7 +90,7 @@ const SignUpForm = () => {
                         </div>
                       ) : null}
                       <Input
-                        label="my-linked-tree/"
+                        label="linked-tree/"
                         placeholder="username"
                         name="username"
                         value={values.username}
@@ -118,7 +101,7 @@ const SignUpForm = () => {
                     <Form.Field>
                       {errors.password && touched.password ? (
                         <div>
-                           <p style={{ color: "#CA0C00", fontSize: "11px" }}>
+                          <p style={{ color: "#CA0C00", fontSize: "11px" }}>
                             {errors.password}
                           </p>
                         </div>
@@ -169,9 +152,8 @@ const SignUpForm = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundImage: "url(images/2.png)",
-          display: isMobile? "none": ""
+          display: width < 768 ? "none" : "",
         }}
-        
       ></Grid.Column>
     </Grid>
   );

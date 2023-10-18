@@ -1,1 +1,1 @@
-export * from "./is-mobile";
+export * from "./screen-width-hook";

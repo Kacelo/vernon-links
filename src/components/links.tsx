@@ -87,7 +87,7 @@ const RoundedDiv = (linkData: LinkType) => {
             href={link}
             // width={1}
           >
-            <Image alt="Icon" src={icon} style={styles.imageStyles} />
+            <Image alt="Icon" src={icon} size="small"/>
           </Grid.Column>
           <Grid.Column
             style={{ textAlign: "center", margin: "auto 0" }}

@@ -19,7 +19,10 @@ export default function RootLayout({
         <title>{title}</title>
         {/* <meta name="description" content="Beauty is our duty" /> */}
       </head>
-      <body suppressHydrationWarning={true} className={inter.className}>{children}</body>
+      <body suppressHydrationWarning={true} className={inter.className}>{children}
+      
+      
+      </body>
     </html>
   );
 }

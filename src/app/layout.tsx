@@ -20,8 +20,6 @@ export default function RootLayout({
         {/* <meta name="description" content="Beauty is our duty" /> */}
       </head>
       <body suppressHydrationWarning={true} className={inter.className}>{children}
-      
-      
       </body>
     </html>
   );

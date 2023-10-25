@@ -12,18 +12,41 @@ import Image from "next/image";
 import styles from "./styles/landing-styles.module.css";
 const LandingPage = () => {
   const [rotate, setRotate] = useState(false);
-  const [rotateStates, setRotateStates] = useState([false, false, false, false]);
+  const [rotateStates, setRotateStates] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
 
-  const handleClick = (index:number) => {
+  const handleClick = (index: number) => {
     const newRotateStates = [...rotateStates];
     newRotateStates[index] = !rotateStates[index];
     setRotateStates(newRotateStates);
   };
 
+  // setInterval(()=>handleClick(0), 5000);
+  // setInterval(()=>handleClick(1), 7000);
+  // setInterval(()=>handleClick(2), 8000);
+  // setInterval(()=>handleClick(3), 10000);
+
   return (
-    <Container>
-      <Container>
-        <figure>
+    <div style={{minHeight: "100vh"}}>
+      <div className={styles.secondDiv}>
+      <Grid stackable >
+              <Grid.Row columns={2} className={styles.cardcolumn} reversed="computer tablet">
+                <Grid.Column>
+                  <div>
+                    <h2 className={styles.cardSideHeading}>
+                    Analyze your audience and keep your followers engaged
+                    </h2>
+                  </div>
+                  <div>
+                  <p>Track your engagement over time, monitor revenue and learn what’s converting your audience. Make informed updates on the fly to keep them coming back.</p>
+                  </div>
+                </Grid.Column>
+                <Grid.Column className={styles.cardCol}>
+                <figure>
           <div
             className="wrapper"
             style={{
@@ -34,12 +57,12 @@ const LandingPage = () => {
               width: "100%",
             }}
           >
-            <Grid padded stackable>
-              <Grid.Row verticalAlign="middle" >
-                <Grid.Column width={5}>
+            {/* <Grid padded stackable>
+              <Grid.Row verticalAlign="middle" columns={2} >
+                <Grid.Column >
                   <div onClick={() => handleClick(0)} className={styles.imageContainer}>
                     <Image
-                      src="/images/1.png"
+                      src="/images/3.png"
                       alt=""
                       width={300}
                       height={200}
@@ -49,7 +72,7 @@ const LandingPage = () => {
                       }
                     />
                     <Image
-                      src="/images/2.png"
+                      src="/images/1.png"
                       alt=""
                       width={300}
                       height={200}
@@ -58,11 +81,38 @@ const LandingPage = () => {
                     />
                   </div>
                 </Grid.Column>
-                <Grid.Column width={3}>
+              
+                <Grid.Column>
+                <div onClick={() => handleClick(2)} className={styles.imageContainer2}>
+                    <div className="inner">
+                      <Image
+                        src="/images/6.png"
+                        alt=""
+                        width={160}
+                        height={200}
+                        style={{ borderRadius: "24px", objectFit: "cover" }}
+                        className={
+                          rotateStates[2]  ? styles.rotateFrontImage2 : styles.frontImage2
+                        }
+                      />{" "}
+                      <Image
+                        src="/images/5.png"
+                        alt=""
+                        width={160}
+                        height={200}
+                        style={{ borderRadius: "24px", objectFit: "cover" }}
+                        className={ rotateStates[2]   ?  styles.rotateBackImage2 : styles.backImage2 }
+                      />{" "}
+                    </div>
+                  </div>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row verticalAlign="middle" columns={2}>  
+              <Grid.Column >
                 <div onClick={() => handleClick(1)} className={styles.imageContainer2}>
                     <div className="inner">
                       <Image
-                        src="/images/3.png"
+                        src="/images/8.png"
                         alt=""
                         width={160}
                         height={200}
@@ -72,7 +122,7 @@ const LandingPage = () => {
                         }
                       />{" "}
                       <Image
-                        src="/images/4.png"
+                        src="/images/7.png"
                         alt=""
                         width={160}
                         height={200}
@@ -83,37 +133,11 @@ const LandingPage = () => {
                     </div>
                   </div>
                 </Grid.Column>
-              </Grid.Row>
-              <Grid.Row>
-                <Grid.Column width={3}>
-                <div onClick={() => handleClick(2)} className={styles.imageContainer2}>
-                    <div className="inner">
-                      <Image
-                        src="/images/5.png"
-                        alt=""
-                        width={160}
-                        height={200}
-                        style={{ borderRadius: "24px", objectFit: "cover" }}
-                        className={
-                          rotateStates[2]  ? styles.rotateFrontImage2 : styles.frontImage2
-                        }
-                      />{" "}
-                      <Image
-                        src="/images/6.png"
-                        alt=""
-                        width={160}
-                        height={200}
-                        style={{ borderRadius: "24px", objectFit: "cover" }}
-                        className={ rotateStates[2]   ?  styles.rotateBackImage2 : styles.backImage2 }
-                      />{" "}
-                    </div>
-                  </div>
-                </Grid.Column>
-                <Grid.Column width={5}>
+                <Grid.Column style={{width:"min-content"}}>
                 <div onClick={() => handleClick(3)} className={styles.imageContainer}>
                     <div className="inner">
                       <Image
-                        src="/images/7.png"
+                        src="/images/4.png"
                         alt=""
                         width={300}
                         height={200}
@@ -121,9 +145,9 @@ const LandingPage = () => {
                         className={
                           rotateStates[3]  ? styles.rotateFrontImage : styles.frontImage
                         }
-                      />{" "}
+                      />
                       <Image
-                        src="/images/8.png"
+                        src="/images/2.png"
                         alt=""
                         width={300}
                         height={200}
@@ -135,23 +159,153 @@ const LandingPage = () => {
                   </div>
                 </Grid.Column>
               </Grid.Row>
+            </Grid> */}
 
-              {/* <Grid.Row columns={3}>
-          <Grid.Column>
-            <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-          </Grid.Column>
-          <Grid.Column>
-            <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-          </Grid.Column>
-          <Grid.Column>
-            <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-          </Grid.Column>
-        </Grid.Row> */}
-            </Grid>
+            <div className={styles.visual}>
+              <div className={styles.grid}>
+                <div className={styles.widget}>
+                  <div
+                    onClick={() => handleClick(0)}
+                    className={styles.imageContainer}
+                  >
+                    <Image
+                      src="/images/3.png"
+                      alt=""
+                      width={300}
+                      height={200}
+                      style={{ borderRadius: "24px", objectFit: "cover" }}
+                      className={
+                        rotateStates[0]
+                          ? styles.rotateFrontImage
+                          : styles.frontImage
+                      }
+                    />
+                    <Image
+                      src="/images/1.png"
+                      alt=""
+                      width={300}
+                      height={200}
+                      style={{ borderRadius: "24px", objectFit: "cover" }}
+                      className={
+                        rotateStates[0]
+                          ? styles.rotateBackImage
+                          : styles.backImage
+                      }
+                    />
+                  </div>
+                </div>
+                <div className={styles.widget}>
+                  <div
+                    onClick={() => handleClick(2)}
+                    className={styles.imageContainer2}
+                  >
+                    <div className="inner">
+                      <Image
+                        src="/images/6.png"
+                        alt=""
+                        width={160}
+                        height={200}
+                        style={{ borderRadius: "24px", objectFit: "cover" }}
+                        className={
+                          rotateStates[2]
+                            ? styles.rotateFrontImage2
+                            : styles.frontImage2
+                        }
+                      />{" "}
+                      <Image
+                        src="/images/5.png"
+                        alt=""
+                        width={160}
+                        height={200}
+                        style={{ borderRadius: "24px", objectFit: "cover" }}
+                        className={
+                          rotateStates[2]
+                            ? styles.rotateBackImage2
+                            : styles.backImage2
+                        }
+                      />{" "}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.grid}>
+                <div className={styles.widget}>
+                  <div
+                    onClick={() => handleClick(1)}
+                    className={styles.imageContainer2}
+                  >
+                    <div className="inner">
+                      <Image
+                        src="/images/8.png"
+                        alt=""
+                        width={160}
+                        height={200}
+                        style={{ borderRadius: "24px", objectFit: "cover" }}
+                        className={
+                          rotateStates[1]
+                            ? styles.rotateFrontImage2
+                            : styles.frontImage2
+                        }
+                      />{" "}
+                      <Image
+                        src="/images/7.png"
+                        alt=""
+                        width={160}
+                        height={200}
+                        style={{ borderRadius: "24px", objectFit: "cover" }}
+                        className={
+                          rotateStates[1]
+                            ? styles.rotateBackImage2
+                            : styles.backImage2
+                        }
+                      />{" "}
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.widget}>
+                  <div
+                    onClick={() => handleClick(3)}
+                    className={styles.imageContainer}
+                  >
+                    <div className="inner">
+                      <Image
+                        src="/images/4.png"
+                        alt=""
+                        width={300}
+                        height={200}
+                        style={{ borderRadius: "24px", objectFit: "cover" }}
+                        className={
+                          rotateStates[3]
+                            ? styles.rotateFrontImage
+                            : styles.frontImage
+                        }
+                      />{" "}
+                      <Image
+                        src="/images/2.png"
+                        alt=""
+                        width={300}
+                        height={200}
+                        style={{ borderRadius: "24px", objectFit: "cover" }}
+                        className={
+                          rotateStates[3]
+                            ? styles.rotateBackImage
+                            : styles.backImage
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </figure>
-      </Container>
-    </Container>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+      </div>
+    
+      
+      </div>
   );
 };
 export default LandingPage;

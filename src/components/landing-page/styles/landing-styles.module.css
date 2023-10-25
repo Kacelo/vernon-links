@@ -5,7 +5,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.5s; /* Add a smooth transition effect */
+  transition: transform 2.5s; /* Add a smooth transition effect */
 }
 .backImage {
   transform: rotateY(0deg); 
@@ -24,16 +24,14 @@
     overflow: hidden; /* Hide overflowing content */
   }
   
-.rotateFrontImage {
-    transform: rotateY(0deg);
-    transition: transform 0.5s;
-  }
-  
 .rotateBackImage {
     transform: rotateY(180deg);
     transition: transform 0.5s;
   }
-
+  .rotateFrontImage {
+    transform: rotateY(0deg);
+    transition: transform 0.5s;
+  }
   .frontImage2,
 .backImage2 {
   position: absolute;
@@ -69,4 +67,59 @@
     transform: rotateY(180deg);
     transition: transform 0.5s;
   }
-  
+
+  .grid:first-child{
+    grid-template-columns: calc(66.66667% - 4%*.66667) calc(33.33333% - 4%*.33333);
+  }
+  .grid:last-child{
+    grid-template-columns: calc(33.33333% - 4%*.33333) calc(66.66667% - 4%*.66667);
+  }
+  .grid{
+    display: grid;
+    gap: 4%;
+    transform-style: preserve-3d;
+  }
+  .widget{
+    cursor: pointer;
+    height: 100%;
+    transform-style: preserve-3d;
+
+  }
+  .visual{
+    --gap: 4%;
+    display: grid;
+    gap: var(--gap);
+    grid-template-rows: 1fr 1fr;
+    perspective: 200rem;
+    -webkit-user-select: none;
+    user-select: none;
+    /* width: 80%; */
+  }
+    @media screen and (min-width: 955px){
+      .secondDiv{
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+    }
+
+    .cardcolumn {
+      flex-direction: row-reverse;
+  }
+
+  .cardSideHeading {
+    font-family: "Link Sans", "Arial Black", Arial, sans-serif;
+    font-size: clamp(28px, 8vmin, 56px);
+    font-weight: 820;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-align: left;
+    color: rgb(30, 35, 48);
+  }
+
+  .cardCol {
+    padding-right: 48px;
+  }
+  .secondDiv{
+    padding-left: 16px;
+    padding-right: 16px;
+  }

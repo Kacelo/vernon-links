@@ -10,7 +10,6 @@ import {
 } from "semantic-ui-react";
 import Image from "next/image";
 import styles from "./styles/landing-styles.module.css";
-import { size } from "lodash";
 const LandingPage = () => {
   const [rotate, setRotate] = useState(false);
   const [rotateStates, setRotateStates] = useState([

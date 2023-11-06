@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import LinksComponent from "../components/links";
 import { socials, userDetails } from "../components/links-data";
+import LandingPage from "@/components/landing-page/landing-page";
 // import "semantic-ui-css/semantic.min.css";
 
 export default function Home() {
@@ -12,7 +13,7 @@ export default function Home() {
   }, []);
   return (
     <>
-      {isClient ? <LinksComponent links={socials} user={userDetails} /> : ""};
+      {isClient ? <LandingPage/> : ""};
     </>
   );
 }

@@ -1,15 +1,9 @@
-import {
-  Container,
-  Button,
-  Grid,
-  Segment,
-  Image,
-  Header,
-} from "semantic-ui-react";
+import { Container, Button, Grid, Segment, Header } from "semantic-ui-react";
 
 import React, { useEffect, useState } from "react";
 import { LinkSharingModal2 } from "./shareModal";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
+import Image from "next/image";
 
 type LinkType = {
   name: string;
@@ -27,14 +21,13 @@ interface LinksInterface {
 }
 
 const ModalButton = (linkDetails: LinkType) => {
-  const {link, icon} =linkDetails 
+  const { link, icon } = linkDetails;
   const [openModal, setOpenModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpen = () =>{
+  const handleOpen = () => {
     setOpenModal(!openModal);
-
-  }
+  };
 
   useEffect(() => {
     setIsOpen(openModal);
@@ -60,11 +53,7 @@ const ModalButton = (linkDetails: LinkType) => {
           <BiDotsHorizontalRounded />
         </div>
       </Button>
-      <LinkSharingModal2
-        link={link}
-        openModal={isOpen}
-        linkIcon={icon}
-      />
+      <LinkSharingModal2 link={link} openModal={isOpen} linkIcon={icon} />
     </div>
   );
 };
@@ -77,7 +66,7 @@ const RoundedDiv = (linkData: LinkType) => {
       <Grid columns={"equal"} padded={"vertically"}>
         <Grid.Row
           style={{
-            boxShadow: " rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
+            // boxShadow: " rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
             padding: 0,
           }}
         >
@@ -87,7 +76,7 @@ const RoundedDiv = (linkData: LinkType) => {
             href={link}
             // width={1}
           >
-            <Image alt="" src={icon} style={{ width: "30px" }} />
+            <Image alt="" src={icon} width={30} height={30} />
           </Grid.Column>
           <Grid.Column
             style={{ textAlign: "center", margin: "auto 0" }}
@@ -161,10 +150,9 @@ const LinksComponent = ({ links, user }: LinksInterface) => {
         <Image
           src={profilePicture}
           width={150}
-          display={"inline-block"}
+          height={150}
+          style={{ display: "inline-block", borderRadius: "200px" }}
           alt="Profile Picture"
-          circular
-          centered
         />
 
         <Header as="h1">{name}</Header>

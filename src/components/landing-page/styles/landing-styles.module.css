@@ -26,11 +26,11 @@
   
 .rotateBackImage {
     transform: rotateY(180deg);
-    transition: transform 0.5s;
+    transition: transform 1s;
   }
   .rotateFrontImage {
     transform: rotateY(0deg);
-    transition: transform 0.5s;
+    transition: transform 1s;
   }
   .frontImage2,
 .backImage2 {
@@ -39,16 +39,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.5s; /* Add a smooth transition effect */
+  transition: transform 1s;
 }
 .backImage2 {
   transform: rotateY(0deg); 
-  transition: transform 0.5s;
+  transition: transform 1s;
   /* Rotate the back image 180 degrees */
 }
 .frontImage2 {
   transform: rotateY(180deg); 
-  transition: transform 0.5s;
+  transition: transform 1s;
   /* Rotate the back image 180 degrees */
 }
 .imageContainer2 {
@@ -60,12 +60,12 @@
   
 .rotateFrontImage2 {
     transform: rotateY(0deg);
-    transition: transform 0.5s;
+    transition: transform 1s;
   }
   
 .rotateBackImage2 {
     transform: rotateY(180deg);
-    transition: transform 0.5s;
+    transition: transform 1s;
   }
 
   .grid:first-child{
@@ -104,6 +104,7 @@
 
     .cardcolumn {
       flex-direction: row-reverse;
+      margin: 18em 6em;
   }
 
   .cardSideHeading {

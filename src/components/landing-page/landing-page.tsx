@@ -10,6 +10,7 @@ import {
 } from "semantic-ui-react";
 import Image from "next/image";
 import styles from "./styles/landing-styles.module.css";
+import { size } from "lodash";
 const LandingPage = () => {
   const [rotate, setRotate] = useState(false);
   const [rotateStates, setRotateStates] = useState([
@@ -35,17 +36,20 @@ const LandingPage = () => {
       <div className={styles.secondDiv}>
       <Grid stackable >
               <Grid.Row columns={2} className={styles.cardcolumn} reversed="computer tablet">
-                <Grid.Column>
+                <Grid.Column width={6}>
                   <div>
                     <h2 className={styles.cardSideHeading}>
                     Analyze your audience and keep your followers engaged
                     </h2>
                   </div>
                   <div>
-                  <p>Track your engagement over time, monitor revenue and learn what’s converting your audience. Make informed updates on the fly to keep them coming back.</p>
+                  <p style={{fontWeight:"400", fontSize:"clamp(16px, 2vmin, 20px)"}}>Track your engagement over time, monitor revenue and learn what’s converting your audience. Make informed updates on the fly to keep them coming back.</p>
+                  </div>
+                  <div style={{margin:"48px 0"}}>
+                    <Button style={{borderRadius:"20px"}} size="huge" as={"a"} href="/sign-in" color="pink">Get started for free</Button>
                   </div>
                 </Grid.Column>
-                <Grid.Column className={styles.cardCol}>
+                <Grid.Column className={styles.cardCol} width={10}>
                 <figure>
           <div
             className="wrapper"

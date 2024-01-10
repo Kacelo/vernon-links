@@ -18,6 +18,18 @@ const LandingPage = () => {
     false,
     false,
   ]);
+  const [message, setMesasge] = useState('loading')
+
+  useEffect(() => {
+    fetch("http://localhost:5000/").then(response => response.json()).then(
+      data =>{
+        console.log(data)
+        setMesasge(data);
+      }
+    )
+  }, [])
+  
+  
 
   const handleClick = (index: number) => {
     const newRotateStates = [...rotateStates];

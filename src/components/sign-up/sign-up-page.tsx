@@ -149,7 +149,7 @@ const SignUpForm = () => {
           height: "auto",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          backgroundImage: "url(images/2.png)",
+          backgroundImage: "url(images/signup6.png)",
         }}
       ></Grid.Column>
     </Grid>

@@ -20,14 +20,14 @@ const LandingPage = () => {
   ]);
   const [message, setMesasge] = useState('loading')
 
-  useEffect(() => {
-    fetch("http://localhost:5000/").then(response => response.json()).then(
-      data =>{
-        console.log(data)
-        setMesasge(data);
-      }
-    )
-  }, [])
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/").then(response => response.json()).then(
+  //     data =>{
+  //       console.log(data)
+  //       setMesasge(data);
+  //     }
+  //   )
+  // }, [])
   
   
 

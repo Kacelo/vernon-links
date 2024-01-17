@@ -15,6 +15,7 @@ import { Formik } from "formik";
 import { signUpModel } from "./sign-up-model";
 import { signUpValidationSchema } from "./sign-up-validation-schema";
 import Image from "next/image";
+import axios from "axios";
 
 const SignUpForm = () => {
   const [enableButton, setEnableButton] = useState(false);
@@ -45,6 +46,16 @@ const SignUpForm = () => {
                 validationSchema={signUpValidationSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   console.log("values", values);
+                  axios
+                    .post("http://localhost:5000/sign-up", values)
+                    .then((res) => {
+                      console.log(values);
+                    })
+                    .catch((err) => {
+                      console.log("Error couldn't create TODO");
+                      console.log(err.message);
+                      alert("Error couldn't create TODO");
+                    });
                   // setTimeout(() => {
                   //   alert(JSON.stringify(values, null, 2));
                   //   setSubmitting(false);
@@ -99,7 +110,7 @@ const SignUpForm = () => {
                     <Form.Field>
                       {errors.password && touched.password ? (
                         <div>
-                           <p style={{ color: "#CA0C00", fontSize: "11px" }}>
+                          <p style={{ color: "#CA0C00", fontSize: "11px" }}>
                             {errors.password}
                           </p>
                         </div>
@@ -149,7 +160,7 @@ const SignUpForm = () => {
           height: "auto",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          backgroundImage: "url(images/2.png)",
+          backgroundImage: "url(images/signup6.png)",
         }}
       ></Grid.Column>
     </Grid>

@@ -16,13 +16,63 @@ import { signUpModel } from "./sign-up-model";
 import { signUpValidationSchema } from "./sign-up-validation-schema";
 import Image from "next/image";
 import axios from "axios";
+import { NextResponse, NextRequest } from "next/server";
+import { useRouter } from "next/navigation";
+
+interface userDetails {
+  username: string;
+  email: string;
+  password: string;
+}
 
 const SignUpForm = () => {
   const [enableButton, setEnableButton] = useState(false);
+  const [error, setError] = useState("");
+  const [paginate, setPaginate] = useState(false);
+  const [route, setRoute] = useState("/sign-up");
+  const router = useRouter();
 
   const handleButtonClick = () => {
     setEnableButton(!enableButton);
   };
+  useEffect(() => {
+    if (paginate) {
+      setRoute("/");
+    }
+  }, [paginate]);
+
+  const handleRegister = async (values: userDetails) => {
+    try {
+      const response = await axios
+        .post("http://localhost:5000/sign-up", values)
+        .then((res) => {
+          console.log(values, res);
+          if (res.status === 201) {
+            // Navigate to the homepage after successful registration
+            setPaginate(true);
+          }
+        });
+      // if (response.status === 201) {
+      //   // Navigate to the homepage after successful registration
+      //   router.push('/');
+      // }
+      console.log(response);
+    } catch (error: any) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setError(error.response.data.message);
+        alert(error.response.data.message);
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError("No response received from server");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        setError("An error occurred while making the request");
+      }
+    }
+  };
+
   return (
     <Grid stackable columns={2} style={{ height: "100%" }}>
       <Grid.Column width={10} style={{ padding: "0em 5em" }}>
@@ -46,20 +96,7 @@ const SignUpForm = () => {
                 validationSchema={signUpValidationSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   console.log("values", values);
-                  axios
-                    .post("http://localhost:5000/sign-up", values)
-                    .then((res) => {
-                      console.log(values);
-                    })
-                    .catch((err) => {
-                      console.log("Error couldn't create TODO");
-                      console.log(err.message);
-                      alert("Error couldn't create TODO");
-                    });
-                  // setTimeout(() => {
-                  //   alert(JSON.stringify(values, null, 2));
-                  //   setSubmitting(false);
-                  // }, 400);
+                  handleRegister(values);
                 }}
               >
                 {({
@@ -138,6 +175,7 @@ const SignUpForm = () => {
                         borderRadius: "20px",
                       }}
                       className="ui primary button"
+                      onClick={() => router.push(route)}
                     >
                       Create Account
                     </button>

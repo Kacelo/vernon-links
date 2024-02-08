@@ -5,16 +5,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 2.5s; /* Add a smooth transition effect */
+ /* Add a smooth transition effect */
 }
 .backImage {
   transform: rotateY(0deg); 
-  transition: transform 0.5s;
+  transition: transform 2s;
   /* Rotate the back image 180 degrees */
 }
 .frontImage {
-  transform: rotateY(180deg); 
-  transition: transform 0.5s;
+  /* transform: rotateY(180deg);  */
+  transition: transform 2s;
   /* Rotate the back image 180 degrees */
 }
 .imageContainer {
@@ -26,11 +26,11 @@
   
 .rotateBackImage {
     transform: rotateY(180deg);
-    transition: transform 1s;
+    transition: transform 2s;
   }
   .rotateFrontImage {
     transform: rotateY(0deg);
-    transition: transform 1s;
+    transition: transform 2s;
   }
   .frontImage2,
 .backImage2 {

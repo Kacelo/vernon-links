@@ -24,7 +24,7 @@ const LandingPage = () => {
   ]);
   const [message, setMesasge] = useState("loading");
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo);
   const userProfileInfo = useAppSelector((state) => state.auth.userProfileData);
@@ -42,7 +42,7 @@ const LandingPage = () => {
   const handleLogout = async () => {
     try {
       await dispatch(logout()).unwrap();
-      navigate("/login");
+      // navigate("/login");
     } catch (e) {
       console.error(e);
     }

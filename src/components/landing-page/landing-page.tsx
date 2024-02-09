@@ -11,8 +11,11 @@ import {
 import Image from "next/image";
 import styles from "./styles/landing-styles.module.css";
 import { delay } from "lodash";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
+import { useNavigate } from "react-router-dom";
+import { getUser, logout } from "@/slices/authSlice";
+
 const LandingPage = () => {
-  const [rotate, setRotate] = useState(false);
   const [rotateStates, setRotateStates] = useState([
     false,
     false,
@@ -20,20 +23,29 @@ const LandingPage = () => {
     false,
   ]);
   const [message, setMesasge] = useState("loading");
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/").then(response => response.json()).then(
-  //     data =>{
-  //       console.log(data)
-  //       setMesasge(data);
-  //     }
-  //   )
-  // }, [])
+  const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo);
+  const userProfileInfo = useAppSelector((state) => state.auth.userProfileData);
+  useEffect(() => {
+    if (basicUserInfo) {
+      dispatch(getUser(basicUserInfo.id));
+    }
+  }, [basicUserInfo]);
 
   const handleClick = (index: number) => {
     const newRotateStates = [...rotateStates];
     newRotateStates[index] = !rotateStates[index];
     setRotateStates(newRotateStates);
+  };
+  const handleLogout = async () => {
+    try {
+      await dispatch(logout()).unwrap();
+      navigate("/login");
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const rotateCards = (duration: number) => {
@@ -41,11 +53,11 @@ const LandingPage = () => {
       setTimeout(resolve, duration);
     });
   };
-  const clickFFrame1 = ()=>{
-Promise.resolve()
-    .then(() => rotateCards(2000))
-    .then(() => handleClick(0))
-  }
+  const clickFFrame1 = () => {
+    Promise.resolve()
+      .then(() => rotateCards(2000))
+      .then(() => handleClick(0));
+  };
 
   // Promise.resolve()
   //   .then(() => rotateCards(4000))
@@ -375,6 +387,15 @@ Promise.resolve()
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        <h4>Name: {userProfileInfo?.username}</h4>
+        <h4>Email: {userProfileInfo?.email}</h4>
+        <Button
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
       </div>
     </div>
   );

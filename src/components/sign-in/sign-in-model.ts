@@ -1,4 +1,4 @@
 export const signInModel = {
-    username: '',
+    email: '',
     password: '',
 }

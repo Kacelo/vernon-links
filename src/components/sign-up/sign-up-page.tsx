@@ -18,6 +18,8 @@ import Image from "next/image";
 import axios from "axios";
 import { NextResponse, NextRequest } from "next/server";
 import { useRouter } from "next/navigation";
+import { register } from "@/slices/authSlice";
+import { useAppDispatch } from "@/hooks/redux-hooks";
 
 interface userDetails {
   username: string;
@@ -31,6 +33,7 @@ const SignUpForm = () => {
   const [paginate, setPaginate] = useState(false);
   const [route, setRoute] = useState("/sign-up");
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleButtonClick = () => {
     setEnableButton(!enableButton);
@@ -42,35 +45,66 @@ const SignUpForm = () => {
   }, [paginate]);
 
   const handleRegister = async (values: userDetails) => {
-    try {
-      const response = await axios
-        .post("http://localhost:5000/sign-up", values)
-        .then((res) => {
-          console.log(values, res);
-          if (res.status === 201) {
-            // Navigate to the homepage after successful registration
-            setPaginate(true);
-          }
-        });
-      // if (response.status === 201) {
-      //   // Navigate to the homepage after successful registration
-      //   router.push('/');
-      // }
-      console.log(response);
-    } catch (error: any) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        setError(error.response.data.message);
-        alert(error.response.data.message);
-      } else if (error.request) {
-        // The request was made but no response was received
-        setError("No response received from server");
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        setError("An error occurred while making the request");
+    const { username, email, password } = values;
+    if (username && email && password) {
+      try {
+        await dispatch(
+          register({
+            username,
+            email,
+            password,
+          })
+        ).unwrap();
+        // if (res.status === 201) {
+        //   // Navigate to the homepage after successful registration
+        //   setPaginate(true);
+        // }
+      } catch (error: any) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          setError(error.response.data.message);
+          alert(error.response.data.message);
+        } else if (error.request) {
+          // The request was made but no response was received
+          setError("No response received from server");
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          setError("An error occurred while making the request");
+        }
       }
+    } else {
+      // Show an error message.
     }
+    // try {
+    //   const response = await axios
+    //     .post("http://localhost:5000/sign-up", values)
+    //     .then((res) => {
+    //       console.log(values, res);
+    //       if (res.status === 201) {
+    //         // Navigate to the homepage after successful registration
+    //         setPaginate(true);
+    //       }
+    //     });
+    //   // if (response.status === 201) {
+    //   //   // Navigate to the homepage after successful registration
+    //   //   router.push('/');
+    //   // }
+    //   console.log(response);
+    // } catch (error: any) {
+    //   if (error.response) {
+    //     // The request was made and the server responded with a status code
+    //     // that falls out of the range of 2xx
+    //     setError(error.response.data.message);
+    //     alert(error.response.data.message);
+    //   } else if (error.request) {
+    //     // The request was made but no response was received
+    //     setError("No response received from server");
+    //   } else {
+    //     // Something happened in setting up the request that triggered an Error
+    //     setError("An error occurred while making the request");
+    //   }
+    // }
   };
 
   return (

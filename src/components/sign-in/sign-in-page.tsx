@@ -15,13 +15,43 @@ import { Formik } from "formik";
 import { signInModel } from "./sign-in-model";
 import { signInValidationSchema } from "./sign-in-validation-schema";
 import Image from "next/image";
-
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { login } from "@/slices/authSlice";
+type User = {
+  email: string;
+  password: string;
+};
 const SignInForm = () => {
   const [enableButton, setEnableButton] = useState(false);
 
   const handleButtonClick = () => {
     setEnableButton(!enableButton);
   };
+
+  const dispatch = useAppDispatch();
+
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+
+  const handleLogin = async (values: User) => {
+    // This is only a basic validation of inputs. Improve this as needed.
+    const { email, password } = values;
+    if (email && password) {
+      try {
+        await dispatch(
+          login({
+            email,
+            password,
+          })
+        ).unwrap();
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      // Show an error message.
+    }
+  };
+
   const accountQuestion = "Don't have an account?";
   return (
     <Grid stackable columns={2} style={{ height: "100%" }}>
@@ -46,10 +76,7 @@ const SignInForm = () => {
                 validationSchema={signInValidationSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   console.log("values", values);
-                  // setTimeout(() => {
-                  //   alert(JSON.stringify(values, null, 2));
-                  //   setSubmitting(false);
-                  // }, 400);
+                  handleLogin(values);
                 }}
               >
                 {({
@@ -64,10 +91,10 @@ const SignInForm = () => {
                 }) => (
                   <Form onSubmit={handleSubmit}>
                     <Form.Field>
-                      {errors.username && touched.username ? (
+                      {errors.email && touched.email ? (
                         <div>
                           <p style={{ color: "#CA0C00", fontSize: "11px" }}>
-                            {errors.username}
+                            {errors.email}
                           </p>
                         </div>
                       ) : null}
@@ -75,7 +102,7 @@ const SignInForm = () => {
                         placeholder="Email or username"
                         type="text"
                         name="username"
-                        value={values.username}
+                        value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
